@@ -133,7 +133,7 @@ if hist:
     fig = go.Figure(go.Scatter(x=df["t"], y=df["packets"], mode="lines", line=dict(color="#2a8")))
     fig.update_layout(height=250, margin=dict(l=10, r=10, t=10, b=10),
                        xaxis_title="seconds since start", yaxis_title="records per second")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 else:
     st.info("Press Start monitoring to begin generating traffic.")
 
@@ -144,7 +144,7 @@ if rows:
     for col in ("first_seen", "last_seen"):
         df[col] = df[col].map(lambda s: time.strftime("%H:%M:%S", time.localtime(s)))
     df = df[["last_seen", "rule", "severity", "target", "source", "count", "first_seen"]]
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
 else:
     st.caption("No incidents recorded yet.")
 

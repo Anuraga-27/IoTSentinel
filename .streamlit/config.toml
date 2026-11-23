@@ -1,14 +1,12 @@
-# Keep IoTSentinel local-only: no Deploy button, no network access from
-# other machines, no usage statistics sent to Streamlit.
-
-[server]
-address = "localhost"
-port = 8501
-headless = false
+# Settings that are safe both locally and when hosted.
+#
+# Deliberately NOT set here: server.address, server.port and server.headless.
+# Pinning those to localhost breaks hosted deployments, where the platform
+# chooses the address and port. For local-only running, run_dashboard.bat
+# passes --server.address localhost, which keeps the app off the network.
 
 [browser]
 gatherUsageStats = false
-serverAddress = "localhost"
 
 [client]
 toolbarMode = "minimal"

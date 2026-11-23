@@ -1,5 +1,8 @@
-pandas>=2.0
-pyyaml>=6.0
-streamlit>=1.30
-plotly>=5.18
-matplotlib>=3.7
+# Lower bounds are the versions this project was tested against; the upper
+# bounds keep a future major release from breaking a deployment, since the
+# dashboard uses APIs that changed between Streamlit majors.
+pandas>=2.0,<4.0
+pyyaml>=6.0,<7.0
+streamlit>=1.60,<2.0
+plotly>=5.18,<8.0
+matplotlib>=3.7,<4.0
