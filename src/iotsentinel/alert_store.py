@@ -59,5 +59,15 @@ class AlertStore:
     def count(self) -> int:
         return self._conn.execute("SELECT COUNT(*) FROM incidents").fetchone()[0]
 
+    def clear(self) -> None:
+        """Delete every stored incident, leaving the schema in place.
+
+        The dashboard's Reset button uses this. Without it a reset only
+        cleared the in-memory session, while the database kept incidents
+        from previous runs, so the alert log never actually emptied.
+        """
+        self._conn.execute("DELETE FROM incidents")
+        self._conn.commit()
+
     def close(self) -> None:
         self._conn.close()

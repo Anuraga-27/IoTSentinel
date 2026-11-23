@@ -103,6 +103,9 @@ with st.sidebar:
         st.session_state.running = True
 
     if st.button("Reset"):
+        # Empty the stored incidents too: clearing only the session leaves
+        # the alert log showing incidents from earlier runs.
+        st.session_state.store.clear()
         st.session_state.store.close()
         for key in list(st.session_state.keys()):
             del st.session_state[key]

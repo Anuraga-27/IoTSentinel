@@ -7,6 +7,7 @@ Run:  python -m unittest discover -s tests
 
 import random
 import unittest
+from pathlib import Path
 
 import _bootstrap  # noqa: F401
 from iotsentinel import attack_simulator as atk
@@ -122,6 +123,26 @@ class IncidentGrouping(unittest.TestCase):
         self.assertEqual(len(floods), 1)
         self.assertGreater(p.violations_seen, 100)
         self.assertEqual(floods[0].severity, "critical")
+
+
+class AlertStoreReset(unittest.TestCase):
+    def test_clear_empties_the_alert_log(self):
+        import tempfile
+        from iotsentinel.alert_store import AlertStore
+
+        with tempfile.TemporaryDirectory() as tmp:
+            store = AlertStore(Path(tmp) / "test.db")
+            records = baseline() + list(atk.flooding(
+                duration_s=10, start_time=T0 + 30, device_name="camera-1",
+                rng=random.Random(6)))
+            pipeline = Pipeline(load_rules(), store=store)
+            pipeline.process_stream(sorted(records, key=lambda r: r.timestamp))
+            self.assertGreater(store.count(), 0, "flood should store an incident")
+
+            store.clear()
+            self.assertEqual(store.count(), 0)
+            self.assertEqual(store.recent(), [])
+            store.close()
 
 
 class FlowCollector(unittest.TestCase):
