@@ -1,0 +1,23 @@
+test_arp_becomes_binding (test_pcap.PcapReader.test_arp_becomes_binding) ... ok
+test_syn_initiates_and_reply_does_not (test_pcap.PcapReader.test_syn_initiates_and_reply_does_not) ... ok
+test_truncated_final_packet_is_skipped (test_pcap.PcapReader.test_truncated_final_packet_is_skipped) ... ok
+test_replies_are_ignored_when_enabled (test_pcap.PortScanCountsAttemptsOnly.test_replies_are_ignored_when_enabled) ... ok
+test_replies_count_when_disabled (test_pcap.PortScanCountsAttemptsOnly.test_replies_count_when_disabled) ... ok
+test_dhcp_reassignment_does_not_alert (test_rules.ArpNoiseControls.test_dhcp_reassignment_does_not_alert) ... ok
+test_whitelisted_pair_never_alerts (test_rules.ArpNoiseControls.test_whitelisted_pair_never_alerts) ... ok
+test_zero_grace_misses_contention (test_rules.ArpNoiseControls.test_zero_grace_misses_contention) ... ok
+test_malformed_records_are_dropped (test_rules.FlowCollector.test_malformed_records_are_dropped) ... ok
+test_flood_collapses_to_one_incident_and_escalates (test_rules.IncidentGrouping.test_flood_collapses_to_one_incident_and_escalates) ... ok
+test_arp_spoof (test_rules.LoudAttacks.test_arp_spoof) ... ok
+test_botnet (test_rules.LoudAttacks.test_botnet) ... ok
+test_brute_force (test_rules.LoudAttacks.test_brute_force) ... ok
+test_flooding (test_rules.LoudAttacks.test_flooding) ... ok
+test_port_scan (test_rules.LoudAttacks.test_port_scan) ... ok
+test_normal_traffic_raises_no_incidents (test_rules.NormalTraffic.test_normal_traffic_raises_no_incidents) ... ok
+test_slow_brute_force_is_missed (test_rules.SlowAttacksEvadeFixedThresholds.test_slow_brute_force_is_missed) ... ok
+test_slow_port_scan_is_missed (test_rules.SlowAttacksEvadeFixedThresholds.test_slow_port_scan_is_missed) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.215s
+
+OK

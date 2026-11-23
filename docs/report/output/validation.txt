@@ -1,0 +1,18 @@
+﻿Self-generated corpus: 18656 records, 12 ground-truth windows
+
+
+Flow collector: {'accepted': 18656, 'dropped': 0}
+Raw rule violations: 13204
+Grouped incidents: 7
+
+attack          TP  FN  FP   recall  precision
+flooding         1   1   2     0.50       0.33
+port_scan        1   1   0     0.50       1.00
+brute_force      1   1   0     0.50       1.00
+arp_spoof        1   0   0     1.00       1.00
+botnet           1   1   0     0.50       1.00
+
+False positives on benign/hard-benign cases: 2 (rate per benign case: 0.67)
+Total incidents raised: 7
+
+Note: rows under 'detectable=False' (hard benign cases and slow/stealthy attacks) are EXPECTED to score as misses/false positives with fixed thresholds -- that is the point of including them. See validation/threshold_sweep.py for how detection trades off against false alarms as thresholds change.

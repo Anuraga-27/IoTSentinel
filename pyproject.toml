@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iotsentinel"
+version = "0.1.0"
+description = "A rule-based intrusion detection system for simulated IoT networks"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "pyyaml>=6.0",
+    "streamlit>=1.30",
+    "plotly>=5.18",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

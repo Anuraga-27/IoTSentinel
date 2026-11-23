@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+*.db
+validation/out/
+node_modules/

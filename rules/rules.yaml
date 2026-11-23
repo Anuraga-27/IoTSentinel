@@ -1,0 +1,61 @@
+# IoTSentinel detection rules
+# Thresholds are starting points; the validation/threshold_sweep.py script
+# measures detection rate vs false-alarm rate across a range of values so
+# these can be tuned with evidence instead of guesswork.
+
+rules:
+  flooding:
+    description: "Packets arriving at one device within the window"
+    metric: pps_per_target
+    window_seconds: 10
+    threshold: 500          # > threshold triggers
+    severity: high
+
+  port_scan:
+    description: "Distinct destination ports contacted by one source"
+    metric: distinct_ports_per_source
+    window_seconds: 10
+    threshold: 20
+    # Count only packets that open a connection (TCP SYN, UDP to a service
+    # port), not replies inside an existing one. On real CIC IoT 2023 benign
+    # traffic, counting every packet raised 139 false port-scan alerts in
+    # 23 minutes, because server replies go to many random client ports.
+    count_only_connection_attempts: true
+    severity: medium
+
+  brute_force:
+    description: "Failed login attempts from one source"
+    metric: failed_logins_per_source
+    window_seconds: 60
+    threshold: 5
+    severity: high
+
+  arp_spoof:
+    description: "A known IP address observed with a new MAC address"
+    metric: ip_mac_binding_change
+    # "Any change" from the proposal fires on every DHCP reassignment.
+    # A grace period lets a new IP/MAC pairing settle before it is trusted,
+    # and a whitelist exempts pairings the operator has approved
+    # (e.g. a router replacing a NIC, a known DHCP lease renewal).
+    grace_period_seconds: 30
+    whitelist: []           # list of {ip, mac} pairs that never alert
+    severity: critical
+
+  botnet:
+    description: "Telnet connections from one device fanning out to many hosts"
+    metric: distinct_telnet_targets_per_source
+    window_seconds: 30
+    threshold: 10
+    severity: critical
+
+# Alert-noise controls (applies across all rules)
+incident_grouping:
+  # Repeated alerts of the same (rule, source, target) within this window
+  # are grouped into one incident instead of one alert per violation.
+  group_window_seconds: 60
+  # An incident's severity escalates if it keeps re-triggering past these
+  # repeat counts within the group window.
+  escalation_repeat_counts:
+    medium: 3
+    high: 6
+    critical: 10

@@ -1,0 +1,19 @@
+﻿file                                expected rule     packets   span s  detected   t (s)  other alerts
+BenignTraffic.sample.pcap           (none: benign)      84076   1410.7         -       -             8
+DDoS-TCP_Flood.sample.pcap          flooding           117285      6.3       yes    0.03             0
+DictionaryBruteForce.sample.pcap    brute_force         45415 249180.4       yes   42.58             2
+Mirai-greeth_flood.sample.pcap      botnet              15445     14.0        NO       -             2
+MITM-ArpSpoofing.sample.pcap        arp_spoof           12992     14.5       yes    8.46             2
+Recon-PortScan.sample.pcap          port_scan           69361   1972.6       yes   41.96            18
+
+Incidents by rule, per file:
+  BenignTraffic.sample.pcap           {'arp_spoof': 4, 'flooding': 4}
+  DDoS-TCP_Flood.sample.pcap          {'flooding': 2}
+  DictionaryBruteForce.sample.pcap    {'flooding': 1, 'brute_force': 3, 'arp_spoof': 1}
+  Mirai-greeth_flood.sample.pcap      {'flooding': 2}
+  MITM-ArpSpoofing.sample.pcap        {'flooding': 2, 'arp_spoof': 1}
+  Recon-PortScan.sample.pcap          {'port_scan': 6, 'brute_force': 6, 'flooding': 12}
+
+Benign false alarms: 8 over 1410.7s (20.4 per hour)
+
+Wrote validation\out\pcap_results.csv

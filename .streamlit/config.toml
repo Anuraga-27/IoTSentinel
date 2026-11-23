@@ -1,0 +1,14 @@
+# Keep IoTSentinel local-only: no Deploy button, no network access from
+# other machines, no usage statistics sent to Streamlit.
+
+[server]
+address = "localhost"
+port = 8501
+headless = false
+
+[browser]
+gatherUsageStats = false
+serverAddress = "localhost"
+
+[client]
+toolbarMode = "minimal"
